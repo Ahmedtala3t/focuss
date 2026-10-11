@@ -1,0 +1,59 @@
+name: FocusLock
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    # ضع هنا Team ID الخاص بحسابك (أو اخترها من Xcode > Signing & Capabilities)
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  FocusLock:
+    type: application
+    platform: iOS
+    sources: [FocusLock]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.focuslock
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) BLOCKING"
+    info:
+      path: FocusLock/Info.plist
+      properties:
+        CFBundleDisplayName: وضع التركيز
+        CFBundleDevelopmentRegion: ar
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+    entitlements:
+      path: FocusLock/FocusLock.entitlements
+      properties:
+        com.apple.developer.family-controls: true
+    dependencies:
+      - target: FocusMonitor
+        embed: true
+
+  FocusMonitor:
+    type: app-extension
+    platform: iOS
+    sources: [FocusMonitor]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.focuslock.monitor
+    info:
+      path: FocusMonitor/Info.plist
+      properties:
+        CFBundleDisplayName: FocusMonitor
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.deviceactivity.monitor-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FocusMonitor
+    entitlements:
+      path: FocusMonitor/FocusMonitor.entitlements
+      properties:
+        com.apple.developer.family-controls: true

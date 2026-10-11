@@ -1,0 +1,34 @@
+name: FocusLock
+# النسخة Lite: تعمل بحساب Apple مجاني (بدون حجب تلقائي للتطبيقات).
+# للنسخة الكاملة (حجب عبر Screen Time) استخدم: xcodegen --spec project_full.yml
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  FocusLock:
+    type: application
+    platform: iOS
+    sources: [FocusLock]
+    settings:
+      base:
+        # غيّره لاسم فريد خاص بك، مثل com.ahmed.focuslock
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.focuslock
+        TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: FocusLock/Info.plist
+      properties:
+        CFBundleDisplayName: وضع التركيز
+        CFBundleDevelopmentRegion: ar
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
