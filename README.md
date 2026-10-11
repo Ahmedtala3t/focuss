@@ -1,0 +1,2 @@
+# focuss
+Focus mode
